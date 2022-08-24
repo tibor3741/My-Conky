@@ -65,8 +65,8 @@ ${font Mallige:size=14}${alignc}${color1}${time %H}${color2}:${time %M}${color3}
 ${font Impact:size=12}${alignc}${color4}${time %A}, ${time %B} ${time %e}, ${time %Y}
 ${voffset 2}${hr 1}
 #Weather#
-${font Dejavu Sans Mono:size=12}${alignc}${color yellow}${execpi 300 curl wttr.in/NewYork?T0 --silent --max-time 3}${font ubuntu:size=10.5}${color}
-${voffset 2}${hr 1}
+#${font Dejavu Sans Mono:size=12}${alignc}${color yellow}${execpi 300 curl wttr.in/NewYork?T0 --silent --max-time 3}${font ubuntu:size=10.5}${color}
+#${voffset 2}${hr 1}
 
 #NETWORK#
 ${font monospace:bold:size=10}NETWORK ${hr 2}
