@@ -10,5 +10,7 @@ new monitoring:
 
 
 calendar:
+![image](https://user-images.githubusercontent.com/36704519/219874038-b965a784-b84e-4cc8-ace9-2376b810858d.png)
 
 network:
+![image](https://user-images.githubusercontent.com/36704519/219874008-be5179b0-2083-4b6e-a20f-74378c6cbf50.png)
