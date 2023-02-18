@@ -1,0 +1,72 @@
+--[[ Conky config BSPWM ]]
+conky.config = {
+
+	background = true,
+	double_buffer = true,
+	text_buffer_size = 2048,
+	update_interval = 2,				-- update interval
+
+	--Placement
+
+	alignment = 'bottom_middle',		            -- top_left,top_middle,top_right,bottom_left,bottom_middle,bottom_right,
+
+	gap_x = 40,									-- pixels between right or left border
+	gap_y = 0,									-- pixels between bottom or left border
+	minimum_width = 300,						-- minimum height of window
+	border_inner_margin = 5, 					-- margin between border and text
+	border_outer_margin = 5, 					-- margin between border and edge of window
+	border_width = 0, 							-- border width in pixels
+	default_shade_color = '#000000',			-- default shading colour
+	default_outline_color = '#000000',			-- default outline colour
+	draw_borders = false,						-- draw borders around text
+	draw_graph_borders = true,					-- draw borders around graphs
+	draw_shades = false,						-- draw shades
+	draw_outline = false,						-- draw outline
+	stippled_borders = 0,						-- dashing the border
+	extra_newline = false,						-- extra newline at the end - for asesome's wiboxes
+	format_human_readable = true,				-- KiB, MiB rather then number of bytes
+	font = 'Cantarell:regular:size=12',  			-- font for complete conky unless in code defined
+	max_text_width = 0,							-- 0 will make sure line does not get broken if width too smal
+	max_user_text = 16384,						-- max text in conky default 16384
+	override_utf8_locale = true,				-- force UTF8 requires xft
+	short_units = true,							-- shorten units from KiB to k
+	top_name_width = 21,						-- width for $top name value default 15
+	top_name_verbose = false,					-- If true, top name shows the full command line of  each  process - Default value is false.
+	uppercase = false,							-- uppercase or not
+	use_spacer = 'none',						-- adds spaces around certain objects to align - default none
+	use_xft = true,								-- xft font - anti-aliased font
+	xftalpha = 1,								-- alpha of the xft font - between 0-1
+
+	--Windows
+
+	own_window = true,							-- create your own window to draw
+	own_window_argb_value = 60,			    -- real transparency - composite manager required 0-255
+	own_window_argb_visual = true,				-- use ARGB - composite manager required
+	own_window_class = 'Conky',					-- manually set the WM_CLASS name for use with xprop
+	own_window_colour = '#000000',				-- set colour if own_window_transparent no
+	own_window_hints = 'undecorated,below,above,sticky,skip_taskbar,skip_pager',  -- if own_window true - just hints - own_window_type sets it
+	own_window_transparent = false,				-- if own_window_argb_visual is true sets background opacity 0%
+	own_window_title = 'system_conky',			-- set the name manually  - default conky "hostname"
+	own_window_type = 'desktop',				-- if own_window true options are: normal/override/dock/desktop/panel
+
+
+	--Colours
+
+	--color0 = '#5beedc',
+	color0 = '#2e8b57',
+	color1 = '#FFFFFF',
+
+};
+
+conky.text = [[
+#NETWORK#
+${font monospace:bold:size=10}NETWORK ${hr 2}
+Public IP:#${exec curl -s www.icanhazip.com}
+
+LAN IP: ${if_existing /proc/net/route wlp1s0 }${addr wlp1s0}${else}${if_existing /proc/net/route wlp1s0}${addr wlp1s0}${else}Network disconnected${endif}${endif}
+Localhost: 127.0.0.1
+Open Ports: 12345 MINETEST, 6864 SSH & SFTP, 80 HTTP
+${font monospace:normal:size=14}Download: ${alignr}${downspeedgraph wlp1s0 12, 100 -l} ${downspeedf wlp1s0} KB/s
+Upload:${alignr}${upspeedgraph wlp1s0 12,100 -l} ${upspeedf wlp1s0} KB/s
+${hr 2}
+]];
