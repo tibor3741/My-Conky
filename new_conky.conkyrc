@@ -1,0 +1,95 @@
+--[[ Conky config BSPWM ]]
+conky.config = {
+
+	background = true,
+	double_buffer = true,
+	text_buffer_size = 2048,
+	update_interval = 2,				-- update interval
+
+	--Placement
+
+	alignment = 'middle_right',		            -- top_left,top_middle,top_right,bottom_left,bottom_middle,bottom_right,
+
+	gap_x = 40,									-- pixels between right or left border
+	gap_y = 0,									-- pixels between bottom or left border
+	minimum_width = 300,						-- minimum height of window
+	border_inner_margin = 5, 					-- margin between border and text
+	border_outer_margin = 5, 					-- margin between border and edge of window
+	border_width = 0, 							-- border width in pixels
+	default_shade_color = '#000000',			-- default shading colour
+	default_outline_color = '#000000',			-- default outline colour
+	draw_borders = false,						-- draw borders around text
+	draw_graph_borders = true,					-- draw borders around graphs
+	draw_shades = false,						-- draw shades
+	draw_outline = false,						-- draw outline
+	stippled_borders = 0,						-- dashing the border
+	extra_newline = false,						-- extra newline at the end - for asesome's wiboxes
+	format_human_readable = true,				-- KiB, MiB rather then number of bytes
+	font = 'Cantarell:regular:size=12',  			-- font for complete conky unless in code defined
+	max_text_width = 0,							-- 0 will make sure line does not get broken if width too smal
+	max_user_text = 16384,						-- max text in conky default 16384
+	override_utf8_locale = true,				-- force UTF8 requires xft
+	short_units = true,							-- shorten units from KiB to k
+	top_name_width = 21,						-- width for $top name value default 15
+	top_name_verbose = false,					-- If true, top name shows the full command line of  each  process - Default value is false.
+	uppercase = false,							-- uppercase or not
+	use_spacer = 'none',						-- adds spaces around certain objects to align - default none
+	use_xft = true,								-- xft font - anti-aliased font
+	xftalpha = 1,								-- alpha of the xft font - between 0-1
+
+	--Windows
+
+	own_window = true,							-- create your own window to draw
+	own_window_argb_value = 60,			    -- real transparency - composite manager required 0-255
+	own_window_argb_visual = true,				-- use ARGB - composite manager required
+	own_window_class = 'Conky',					-- manually set the WM_CLASS name for use with xprop
+	own_window_colour = '#000000',				-- set colour if own_window_transparent no
+	own_window_hints = 'undecorated,below,above,sticky,skip_taskbar,skip_pager',  -- if own_window true - just hints - own_window_type sets it
+	own_window_transparent = false,				-- if own_window_argb_visual is true sets background opacity 0%
+	own_window_title = 'system_conky',			-- set the name manually  - default conky "hostname"
+	own_window_type = 'desktop',				-- if own_window true options are: normal/override/dock/desktop/panel
+
+
+	--Colours
+
+	--color0 = '#5beedc',
+	color0 = '#2e8b57',
+	color1 = '#FFFFFF',
+
+};
+
+conky.text = [[
+${font sans-serif:bold}SYSTEM ${hr 2}
+${font sans-serif:normal} Kernel:  ${alignr}${kernel}
+#Host:$alignr$nodename
+CPU: ${cpu cpu}% ${alignr}
+RAM: $memperc% ${alignr}${membar 8,60}
+Uptime: ${alignr}${uptime}
+
+${font sans-serif:bold:size=8}MEMORY ${hr 2}
+${font sans-serif:normal:size=8}RAM $alignc $mem / $memmax $alignr $memperc%
+$membar
+SWAP $alignc ${swap} / ${swapmax} $alignr ${swapperc}%
+${swapbar}
+#Process
+${font sans-serif:bold}  PROCESSORS ${font}
+${font sans-serif:bold:size=10}MEMORY ${hr 2}${color}
+${goto 40}Name ${alignr 39} PID  MEM ${font sans-serif:normal:size=10}
+${goto 40}${top name 1} ${alignr 39} ${top pid 1} ${top mem 1}%
+${goto 40}${top name 2} ${alignr 39} ${top pid 2} ${top mem 2}%
+${goto 40}${top name 3} ${alignr  39} ${top pid 3} ${top mem 3}%
+${goto 40}${top name 4} ${alignr 39} ${top pid 4} ${top mem 4}%
+${goto 40}${top name 5} ${alignr 39}${top pid 5} ${top mem 5}%
+${font sans-serif:bold:size=10}CPU ${hr 2}${font}
+${goto 40}Name ${alignr 39}  CPU ${font sans-serif:normal:size=10}
+${goto 40}${color2}${top_mem name 1}${color}${alignr 39}${top cpu 1}%
+${goto 40}${color2}${top_mem name 2}${color}${alignr 39}${top cpu 2}%
+${goto 40}${color2}${top_mem name 3}${color}${alignr 39}${top cpu 3}%
+${goto 40}${color2}${top_mem name 4}${color}${alignr 39}${top cpu 4}%
+${goto 40}${color2}${top_mem name 5}${color}${alignr 39}${top cpu 5}%
+${exec sensors | awk '/Core 0/ {print "CPU Temperature:                                            "$3}'}
+CPU  1 : ${cpu cpu0}% ${cpubar cpu1 10,200} $alignr ${exec awk '/cpu MHz/{i++}i==1{printf "%.f",$4; exit}' /proc/cpuinfo} MHz $alignr
+${cpugraph cpu0 50,450 52ff00 6edd21}
+CPU  2 : ${cpu cpu1}% ${cpubar cpu2 10,200} $alignr ${exec awk '/cpu MHz/{i++}i==2{printf "%.f",$4; exit}' /proc/cpuinfo} MHz $alignr
+${cpugraph cpu1 50,450 52ff00 6edd21}
+]];
